@@ -1,3 +1,4 @@
+import logging
 from argparse import ArgumentParser
 from os.path import exists
 
@@ -14,7 +15,11 @@ def main():
                         help="Output file, can include '{}' to use as a template.")
     parser.add_argument("-u", "--update", action="store_true",
                         help="Set flag to force update the data from the server.")
+    parser.add_argument("-v", "--verbose", action="store_true",
+                        help="Verbose output.")
     opts = parser.parse_args()
+
+    configure_logging(opts.verbose)
 
     if exists(opts.resource):
         from simdata import Data
@@ -31,3 +36,11 @@ def main():
         filename = opts.output.format(opts.Noutput)
 
     simdata2vtk(d, opts.Noutput, filename)
+
+def configure_logging(verbose):
+    if verbose:
+        level=logging.DEBUG
+    else:
+        level=logging.INFO
+    logging.basicConfig(level=logging.DEBUG,
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
