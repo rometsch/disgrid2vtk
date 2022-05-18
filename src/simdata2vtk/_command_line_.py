@@ -2,7 +2,7 @@ import logging
 from argparse import ArgumentParser
 from os.path import exists
 
-from simdata2vtk.convert import simdata2vtk
+from disgrid2vtk.convert import disgrid2vtk
 
 
 def main():
@@ -22,11 +22,11 @@ def main():
     configure_logging(opts.verbose)
 
     if exists(opts.resource):
-        from simdata import Data
+        from disgrid import Data
         d = Data(opts.resource)
         name = "data"
     else:
-        from simdata import NData
+        from disgrid import NData
         d = NData(opts.resource)
         name = opts.resource
 
@@ -35,7 +35,7 @@ def main():
     else:
         filename = opts.output.format(opts.Noutput)
 
-    simdata2vtk(d, opts.Noutput, filename)
+    disgrid2vtk(d, opts.Noutput, filename)
 
 def configure_logging(verbose):
     if verbose:

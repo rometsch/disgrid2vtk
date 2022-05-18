@@ -63,7 +63,7 @@ def get_celldata(f):
     return values
 
 
-def simdata2vtk(d, N, filename):
+def disgrid2vtk(d, N, filename):
     f = d.get(var="mass density", N=N)
 
     X, Y, Z = get_grid(f)

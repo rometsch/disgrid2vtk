@@ -1,1 +1,1 @@
-from simdata2vtk.convert import simdata2vtk
+from disgrid2vtk.convert import disgrid2vtk
